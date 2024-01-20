@@ -4,7 +4,7 @@ const reviewService = new ReviewService();
 
 export const showAllReview = async (req:Request,res:Response) => {
     try {
-        let allReview = await reviewService.getProduct({isDelete: false});
+        let allReview = await reviewService.addPopulate({isDelete: false});
         let review = allReview.map((item: any) => ({
             _id : item._id ,
             user: item.user._id,
@@ -24,7 +24,7 @@ export const showAllReview = async (req:Request,res:Response) => {
 
 export const showReview = async (req:Request,res:Response) => {
     try {
-        let allReview = await reviewService.getProduct({_id: req.body.reviewId, isDelete: false});
+        let allReview = await reviewService.addPopulate({_id: req.body.reviewId, isDelete: false});
         if(!allReview){
             return res.json({message: "review not found!"});
         }
