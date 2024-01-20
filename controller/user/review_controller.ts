@@ -50,7 +50,7 @@ export const addReivew = async (req:Request,res:Response) => {
 
 export const getAllReview = async (req:Request,res:Response) => {
     try {
-        let allReview = await reviewService.getProduct({user: req.user._id, isDelete: false});
+        let allReview = await reviewService.addPopulate({user: req.user._id, isDelete: false});
         let review = allReview.map((item: any) => ({
             _id : item._id ,
             user: req.user._id,
@@ -69,7 +69,7 @@ export const getAllReview = async (req:Request,res:Response) => {
 export const specificReivew = async (req:Request,res:Response) => {
     try {
         // const {cartItem} = req.body;
-        let allReview = await reviewService.getProduct({_id: req.body.cartItem, user: req.user._id, isDelete: false});
+        let allReview = await reviewService.addPopulate({_id: req.body.cartItem, user: req.user._id, isDelete: false});
         if(!allReview){
             return res.json({message: "user does not added review"});
         }
