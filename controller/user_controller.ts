@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import bcryptjs from 'bcrypt'
+import bcryptjs from 'bcryptjs'
 import jwt  from 'jsonwebtoken';
 import Userservice from '../service/user_service';
 const userService = new Userservice();

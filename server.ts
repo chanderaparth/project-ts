@@ -1,7 +1,7 @@
 import express  from "express";
 import dotenv from "dotenv";
-import {DBUtil} from './DB/dbUtil'
 import userRoute from "./routes/user_routes";
+import { DBUtil } from "./db/dbUtil";
 import admin from "./routes/admin/adminIndex_routes";
 import user from "./routes/user/userIndex_routes";
 const server = express();

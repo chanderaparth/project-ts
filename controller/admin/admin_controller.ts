@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import bcrypt from 'bcrypt'
+import bcryptjs from 'bcryptjs'
 import Userservice from "../../service/user_service";
 const userService = new Userservice();
 
@@ -23,7 +23,7 @@ export const getProfile = async (req: Request,res: Response) => {
 export const changePassword = async (req: Request,res: Response) => {
     try {
         let {password, newPassword, confirmPassword} = req.body;
-        let checkPassword = await bcrypt.compare(password, req.admin.password);
+        let checkPassword = await bcryptjs.compare(password, req.admin.password);
         
         if (!checkPassword) {
             return res.json({message: 'Incorrect current password'})
@@ -31,7 +31,7 @@ export const changePassword = async (req: Request,res: Response) => {
         if (newPassword !== confirmPassword) {
             return res.json({message:'New password and Confirm password do not match.'})
         }
-        let hashedPassword = await bcrypt.hash(confirmPassword, 10);
+        let hashedPassword = await bcryptjs.hash(confirmPassword, 10);
         let user = await userService.updateUser(
             req.admin._id,
             {
